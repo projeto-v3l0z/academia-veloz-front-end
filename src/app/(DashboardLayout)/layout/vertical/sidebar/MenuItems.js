@@ -105,6 +105,13 @@ const Menuitems = [
     href: '/awards/winners',
   },
 
+  {
+    id: uniqueId(),
+    title: 'Cursos',
+    icon: IconNotebook,
+    href: '/class', // lembrar de mudar a rota
+  },
+  
   /* {
     navlabel: true,
     subheader: 'Home',
