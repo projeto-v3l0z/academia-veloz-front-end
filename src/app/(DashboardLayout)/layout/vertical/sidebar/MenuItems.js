@@ -109,7 +109,7 @@ const Menuitems = [
     id: uniqueId(),
     title: 'Cursos',
     icon: IconNotebook,
-    href: '/class', // lembrar de mudar a rota
+    href: '/apps/class', // lembrar de mudar a rota
   },
   
   /* {

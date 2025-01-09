@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
 import emblemService from '@/services/emblemService';
 
-const useEmblemForm = (initialData, id) => {
+const useCourse = (initialData, id) => {
   const [formData, setFormData] = useState({
     nome: '',
     descricao: '',
-    instituicao: null,
-    imagem: [],
+    tipo: '',
   });
 
   const [formErrors, setFormErrors] = useState({});
@@ -18,8 +17,7 @@ const useEmblemForm = (initialData, id) => {
       setFormData({
         nome: initialData.nome || '',
         descricao: initialData.descricao || '',
-        instituicao: initialData.instituicao.id || null,
-        imagem: initialData.imagem || '',
+        tipo: initialData.tipo || '',
       });
     }
   }, [initialData]);
@@ -33,17 +31,10 @@ const useEmblemForm = (initialData, id) => {
   const handleSave = async () => {
     const dataToSend = new FormData();
 
-    const is_file =
-      formData.imagem instanceof File ||
-      (formData.imagem instanceof FileList && formData.imagem.length > 0);
-
     // Adiciona os campos ao FormData
     dataToSend.append('nome', formData.nome);
     dataToSend.append('descricao', formData.descricao);
-    dataToSend.append('instituicao_id', formData.instituicao);
-    if (is_file) {
-      dataToSend.append('imagem', formData.imagem);
-    }
+    dataToSend.append('tipo', formData.tipo);
 
     try {
       // Envia os dados para a API de criação ou atualização
@@ -74,4 +65,4 @@ const useEmblemForm = (initialData, id) => {
   };
 };
 
-export default useEmblemForm;
+export default useCourse;
