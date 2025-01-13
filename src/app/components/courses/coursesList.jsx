@@ -210,7 +210,7 @@ const CoursesList = () => {
   });
 
   const handleCreateClick = () => {
-    router.push('/class/create'); // Rota de criação de emblema
+    router.push('/apps/class/create'); // Rota de criação de emblema
   };
 
   const handleEditClick = (id) => {
