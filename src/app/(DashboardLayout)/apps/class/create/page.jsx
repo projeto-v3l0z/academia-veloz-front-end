@@ -1,122 +1,104 @@
 'use client';
 import React, { useState } from 'react';
-import { useParams } from 'next/navigation'; // Para pegar o id da URL
-
-/* MUI */
-import { Alert, Button, Grid, Stack } from '@mui/material';
+import { useRouter } from 'next/navigation';
 
 /* hooks */
-import useEmblem from '@/hooks/emblems/useEmblem.'; // Hook para buscar os dados do emblema
-import useEmblemForm from '@/hooks/emblems/useEmblemForm'; // Hook para lidar com a lógica do formulário de emblema
-import PageContainer from '@/app/components/container/PageContainer'; // Container da página
-import Breadcrumb from '@/app/(DashboardLayout)/layout/shared/breadcrumb/Breadcrumb'; // Breadcrumb para navegação
-import ParentCard from '@/app/components/shared/ParentCard'; // Card para o conteúdo
-import CustomFormLabel from '@/app/components/forms/theme-elements/CustomFormLabel'; // Label customizado para os campos do formulário
-import CustomTextField from '@/app/components/forms/theme-elements/CustomTextField'; // Campo de texto customizado
+import useEmblemForm from '@/hooks/emblems/useEmblemForm';
+import PageContainer from '@/app/components/container/PageContainer';
+import Breadcrumb from '@/app/(DashboardLayout)/layout/shared/breadcrumb/Breadcrumb';
+import { Alert, Button, Grid, Stack } from '@mui/material';
+import ParentCard from '@/app/components/shared/ParentCard';
+import CustomFormLabel from '@/app/components/forms/theme-elements/CustomFormLabel';
+import CustomTextField from '@/app/components/forms/theme-elements/CustomTextField';
 import AutoCompleteInstitutions from '@/app/components/awards/auto-complete/Auto-Input-Institutions';
 
-const EmblemUpdateForm = () => {
-  const param = useParams();
-  const { id } = param; // Pegando o id do emblema da URL
+const EmblemForm = () => {
+  const router = useRouter();
 
-  // Buscando os dados do emblema
-  const { loading, error, emblemData } = useEmblem(id);
-
-  // Usando o hook para o formulário, passando os dados do emblema e o id
-  const { formData, handleChange, handleSave, formErrors, success } = useEmblemForm(emblemData, id);
+  // Desestruturando do hook de formulário do emblema
+  const { formData, handleChange, handleSave, formErrors, success } = useEmblemForm();
   const [imageFile, setImageFile] = useState(null);
 
-  const handleImagemChange = (event) => {
+  const handleImageChange = (event) => {
     const file = event.target.files[0];
     setImageFile(file);
     handleChange('imagem', file);
   };
 
-  // Exibe "Carregando..." enquanto os dados estão sendo carregados
-  if (loading) return <div>Carregando...</div>;
-  // Exibe a mensagem de erro, caso ocorra algum
-  if (error) return <div>{error}</div>;
+  // Redirecionamento após sucesso
+  if (success) {
+    router.push('/awards/emblema');
+  }
 
   return (
     <PageContainer
-      title={'Cadastro de Emblema'}
-      description={'Formulário para atualização de emblema'}
+      title={'Cadastro de Curso'}
+      description={'Formulário para cadastro de novo Curso'}
     >
-      <Breadcrumb title="Editar Emblema" />
-
+      <Breadcrumb title="Criar Curso" />
       {success && (
         <Alert severity="success" sx={{ marginBottom: 3 }}>
-          O curso foi atualizado com sucesso!
+          O curso foi cadastrado com sucesso!
         </Alert>
       )}
-
-      <ParentCard title="Editar Emblema">
+      <ParentCard title="Novo Curso">
         <Grid container spacing={3}>
-          {/* Nome do Curso */}
+          {/* Nome do Emblema */}
           <Grid item xs={12} sm={12} lg={6}>
-            <CustomFormLabel htmlFor="name">Nome do curso</CustomFormLabel>
+            <CustomFormLabel htmlFor="nome">Nome do Curso</CustomFormLabel>
             <CustomTextField
-              name="name"
-              placeholder="ex: Curso de Ouro"
+              name="nome"
+              placeholder="ex: Curso de programação em react"
               variant="outlined"
               fullWidth
-              value={formData.nome}
               onChange={(e) => handleChange('nome', e.target.value)}
-              {...(formErrors.name && { error: true, helperText: formErrors.name })}
+              {...(formErrors.nome && { error: true, helperText: formErrors.nome })}
             />
           </Grid>
 
           {/* Instituição */}
           <Grid item xs={12} sm={12} lg={6}>
-            <CustomFormLabel htmlFor="address">Instituição</CustomFormLabel>
+            <CustomFormLabel htmlFor="instituicao">Instituição</CustomFormLabel>
             <AutoCompleteInstitutions
               fullWidth
-              value={formData.instituicao}
               onChange={(id) => handleChange('instituicao', id)}
               {...(formErrors.instituicao && { error: true, helperText: formErrors.instituicao })}
             />
           </Grid>
 
-          {/* Descrição do Curso */}
+          {/* Descrição do Emblema */}
           <Grid item xs={12} sm={12}>
-            <CustomFormLabel htmlFor="description">Descrição</CustomFormLabel>
+            <CustomFormLabel htmlFor="descricao">Descrição</CustomFormLabel>
             <CustomTextField
-              name="description"
-              placeholder="ex: Este emblema é concedido aos melhores alunos."
+              name="descricao"
+              placeholder="Descrição do curso"
               variant="outlined"
               fullWidth
               multiline
               rows={4}
-              value={formData.descricao}
               onChange={(e) => handleChange('descricao', e.target.value)}
-              {...(formErrors.description && { error: true, helperText: formErrors.description })}
+              {...(formErrors.descricao && { error: true, helperText: formErrors.descricao })}
             />
           </Grid>
 
-          {/* Campo: Upload do Banner */}
+          {/* Imagem do Emblema */}
           <Grid item xs={12}>
-            <CustomFormLabel htmlFor="banner">
-              Imagem do <Curso></Curso>
-            </CustomFormLabel>
-            {/* Container com borda cinza */}
+            <CustomFormLabel htmlFor="banner">Imagem</CustomFormLabel>
             <Stack
               direction="row"
               spacing={2}
               alignItems="center"
               sx={{ border: '1px solid #ccc', borderRadius: '4px', padding: '10px' }}
             >
-              {/* Botão para upload */}
               <Button
                 variant="contained"
                 component="label"
                 color="primary"
                 sx={{ flexShrink: 0 }} // Garante que o botão não encolha
               >
-                {imageFile ? 'Alterar Imagem' : 'Selecionar Imagem'}
-                <input type="file" accept="image/*" onChange={handleImagemChange} hidden />
+                {imageFile ? 'Alterar Banner' : 'Selecionar Banner'}
+                <input type="file" accept="image/*" onChange={handleImageChange} hidden />
               </Button>
-
-              {/* Exibe o nome do arquivo ou o nome do banner existente */}
               <div
                 style={{
                   flexGrow: 1,
@@ -130,11 +112,10 @@ const EmblemUpdateForm = () => {
                 ) : formData.imagem ? (
                   <strong>{formData.imagem.name || formData.imagem}</strong>
                 ) : (
-                  <span>Nenhum Imagem selecionada</span>
+                  <span>Nenhum imagem selecionada</span>
                 )}
               </div>
             </Stack>
-
             {formErrors.imagem && <Alert severity="error">{formErrors.imagem}</Alert>}
           </Grid>
 
@@ -142,7 +123,7 @@ const EmblemUpdateForm = () => {
           <Grid item xs={12} sm={12} lg={12}>
             <Stack direction="row" spacing={2} justifyContent="flex-end" mt={2}>
               <Button variant="contained" color="primary" onClick={handleSave}>
-                Editar
+                Salvar
               </Button>
             </Stack>
           </Grid>
@@ -152,4 +133,4 @@ const EmblemUpdateForm = () => {
   );
 };
 
-export default EmblemUpdateForm;
+export default EmblemForm;
