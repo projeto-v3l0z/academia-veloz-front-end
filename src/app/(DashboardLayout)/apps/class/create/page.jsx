@@ -46,18 +46,18 @@ const EmblemUpdateForm = () => {
 
       {success && (
         <Alert severity="success" sx={{ marginBottom: 3 }}>
-          O emblema foi atualizado com sucesso!
+          O curso foi atualizado com sucesso!
         </Alert>
       )}
 
       <ParentCard title="Editar Emblema">
         <Grid container spacing={3}>
-          {/* Nome do Emblema */}
+          {/* Nome do Curso */}
           <Grid item xs={12} sm={12} lg={6}>
             <CustomFormLabel htmlFor="name">Nome do curso</CustomFormLabel>
             <CustomTextField
               name="name"
-              placeholder="ex: Emblema de Ouro"
+              placeholder="ex: Curso de Ouro"
               variant="outlined"
               fullWidth
               value={formData.nome}
@@ -77,7 +77,7 @@ const EmblemUpdateForm = () => {
             />
           </Grid>
 
-          {/* Descrição do Emblema */}
+          {/* Descrição do Curso */}
           <Grid item xs={12} sm={12}>
             <CustomFormLabel htmlFor="description">Descrição</CustomFormLabel>
             <CustomTextField
@@ -95,7 +95,9 @@ const EmblemUpdateForm = () => {
 
           {/* Campo: Upload do Banner */}
           <Grid item xs={12}>
-            <CustomFormLabel htmlFor="banner">Imagem do Emblema</CustomFormLabel>
+            <CustomFormLabel htmlFor="banner">
+              Imagem do <Curso></Curso>
+            </CustomFormLabel>
             {/* Container com borda cinza */}
             <Stack
               direction="row"
