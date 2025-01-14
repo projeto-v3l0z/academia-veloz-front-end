@@ -39,6 +39,7 @@ import {
 } from '@tabler/icons-react';
 import ParentCard from '../shared/ParentCard';
 import emblemService from '@/services/emblemService'; // Alterado para o serviço de emblemas
+import CourseService from '@/services/courseService';
 
 function Filter({ column }) {
   const columnFilterValue = column.getFilterValue();
@@ -86,7 +87,7 @@ const CoursesList = () => {
   const router = useRouter();
 
   // Dados da tabela
-  const [listEmblems, setListEmblems] = React.useState([]);
+  const [listCourses, setListCourses] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState(null);
   const [open, setOpen] = React.useState(false);
@@ -96,8 +97,10 @@ const CoursesList = () => {
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await emblemService.getEmblems();
-        setListEmblems(data.results);
+        const data = await CourseService.getCourses();
+        if (data.results) {
+          setListCourses(data.results);
+        }
       } catch (err) {
         setError('Erro ao carregar cursos');
       } finally {
@@ -111,24 +114,28 @@ const CoursesList = () => {
   // Colunas da tabela
   const columnHelper = createColumnHelper();
   const columns = [
-    columnHelper.accessor('imagem', {
-      header: () => 'Imagem',
+    columnHelper.accessor('nome', {
+      header: () => 'Nome',
       cell: (info) => {
         return (
-          <img
-            src={info.getValue()}
-            alt="Foto"
-            style={{
-              width: '100px',
-              height: '100px',
-              objectFit: 'cover',
+          <Typography
+            variant="subtitle1"
+            color="textPrimary"
+            fontWeight={600}
+            sx={{
+              whiteSpace: 'nowrap',
+              maxWidth: '200px',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
             }}
-          />
+          >
+            {info.getValue()}
+          </Typography>
         );
       },
     }),
-    columnHelper.accessor('nome', {
-      header: () => 'Nome', // Alterado para nome de emblema
+    columnHelper.accessor('tipo', {
+      header: () => 'Tipo', // Alterado para nome de emblema
       cell: (info) => (
         <Typography
           variant="subtitle1"
@@ -137,24 +144,6 @@ const CoursesList = () => {
           sx={{
             whiteSpace: 'nowrap',
             maxWidth: '200px',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-          }}
-        >
-          {info.getValue()}
-        </Typography>
-      ),
-    }),
-    columnHelper.accessor('descricao', {
-      header: () => 'Descrição', // Alterado para descrição de emblema
-      cell: (info) => (
-        <Typography
-          variant="subtitle1"
-          color="textPrimary"
-          fontWeight={600}
-          sx={{
-            whiteSpace: 'nowrap',
-            maxWidth: '400px',
             overflow: 'hidden',
             textOverflow: 'ellipsis',
           }}
@@ -193,7 +182,7 @@ const CoursesList = () => {
 
   const [columnFilters, setColumnFilters] = React.useState([]);
   const table = useReactTable({
-    data: listEmblems,
+    data: listCourses,
     columns,
     filterFns: {},
     state: {
@@ -214,14 +203,14 @@ const CoursesList = () => {
   };
 
   const handleEditClick = (id) => {
-    router.push(`/awards/emblema/${id}/update`); // Rota de edição de emblema
+    router.push(`/apps/class/${id}/update`); // Rota de edição de emblema
   };
 
   const handleDeleteClick = async (id) => {
     // Excluir emblema
     try {
-      await emblemService.deleteEmblem(id);
-      setListEmblems(listEmblems.filter((emblem) => emblem.id !== id)); // Atualiza a lista após exclusão
+      await CourseService.deleteCourse(id);
+      setListCourses(listCourses.filter((course) => course.id !== id));
     } catch (err) {
       setError('Erro ao excluir o curso');
     }
