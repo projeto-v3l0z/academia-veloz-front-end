@@ -4,7 +4,7 @@ import * as React from 'react';
 // components
 import Breadcrumb from '@/app/(DashboardLayout)/layout/shared/breadcrumb/Breadcrumb';
 import PageContainer from '@/app/components/container/PageContainer';
-import CoursesList from '@/app/components/courses/coursesList';
+import CoursesList from '@/app/components/apps/courses/coursesList';
 
 const BCrumb = [
   {

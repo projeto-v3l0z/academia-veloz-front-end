@@ -24,6 +24,7 @@ import AutoCompleteInstitutions from '@/app/components/awards/auto-complete/Auto
 import ChildCard from '@/app/components/shared/ChildCard';
 import PositionCheckboxCode from '@/app/components/forms/form-elements/checkbox/code/PositionCheckboxCode';
 import PositionCheckbox from '@/app/components/forms/form-elements/checkbox/Position';
+import AutoCompleteAlunos from '@/app/components/apps/courses/auto-complete/Auto-input-Alunos';
 
 const CoursesForm = () => {
   const router = useRouter();
@@ -65,7 +66,7 @@ const CoursesForm = () => {
               variant="outlined"
               fullWidth
               onChange={(e) => handleChange('nome', e.target.value)}
-              onBlur={() => {}}
+              onBlur={() => { }}
               {...(formErrors.nome && { error: true, helperText: formErrors.nome })}
             />
           </Grid>
@@ -105,22 +106,11 @@ const CoursesForm = () => {
           <Grid item xs={12}>
             <FormControl fullWidth>
               <CustomFormLabel htmlFor="alunos">Selecionar Alunos</CustomFormLabel>
-              <Select
-                id="alunos-select"
-                multiple
-                value={selectedAlunos}
-                onChange={handleAlunosChange}
-                renderValue={(selected) =>
-                  selected.map((id) => alunos.find((aluno) => aluno.id === id)?.name).join(', ')
-                }
-              >
-                {alunos.map((aluno) => (
-                  <MenuItem key={aluno.id} value={aluno.id}>
-                    <Checkbox checked={selectedAlunos.includes(aluno.id)} />
-                    <ListItemText primary={aluno.name} />
-                  </MenuItem>
-                ))}
-              </Select>
+              <AutoCompleteAlunos
+                fullWidth
+                onChange={(id) => handleChange('alunos', id)}
+                {...(formErrors.alunos && { error: true, helperText: formErrors.alunos })}
+              />
             </FormControl>
           </Grid>
 

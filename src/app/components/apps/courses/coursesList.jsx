@@ -37,9 +37,9 @@ import {
   IconChevronsLeft,
   IconChevronsRight,
 } from '@tabler/icons-react';
-import ParentCard from '../shared/ParentCard';
 import emblemService from '@/services/emblemService'; // Alterado para o serviço de emblemas
 import CourseService from '@/services/courseService';
+import ParentCard from '../../shared/ParentCard';
 
 function Filter({ column }) {
   const columnFilterValue = column.getFilterValue();

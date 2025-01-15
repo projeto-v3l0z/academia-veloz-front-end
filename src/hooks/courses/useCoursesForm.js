@@ -6,6 +6,7 @@ const useCourse = (initialData, id) => {
     nome: '',
     descricao: '',
     tipo: '',
+    alunos: [],
   });
 
   const [formErrors, setFormErrors] = useState({});
@@ -18,6 +19,7 @@ const useCourse = (initialData, id) => {
         nome: initialData.nome || '',
         descricao: initialData.descricao || '',
         tipo: initialData.tipo || '',
+        alunos: initialData.alunos || [],
       });
     }
   }, [initialData]);
@@ -35,6 +37,7 @@ const useCourse = (initialData, id) => {
     dataToSend.append('nome', formData.nome);
     dataToSend.append('descricao', formData.descricao);
     dataToSend.append('tipo', formData.tipo);
+    dataToSend.append('alunos', JSON.stringify(formData.alunos));
 
     try {
       // Envia os dados para a API de criação ou atualização

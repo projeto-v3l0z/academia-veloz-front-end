@@ -23,7 +23,7 @@ const userService = {
 
   getUserByName: async (name) => {
     try {
-      const response = await apiClient.get(`/api/users/?name=${name}`);
+      const response = await apiClient.get(`/api/users/?username=${name}`);
       return response.data;
     } catch (error) {
       console.error(`Erro ao buscar usuário com id ${name}:`, error);
