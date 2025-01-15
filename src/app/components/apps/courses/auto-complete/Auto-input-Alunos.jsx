@@ -33,7 +33,7 @@ export default function AutoCompleteAlunos({ onChange, value = [], error, helper
 
   const handleChange = (event, newValue) => {
     setSelectedAluno(newValue);
-    onChange(newValue.map((aluno) => aluno.id));
+    onChange(newValue.map((aluno) => Number(aluno.id)));
   };
 
   const fetchAlunosByName = useCallback(

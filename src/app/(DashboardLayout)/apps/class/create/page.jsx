@@ -92,6 +92,7 @@ const CoursesForm = () => {
                 labelId="tipo-curso-label"
                 id="tipo-curso-select"
                 placeholder="Tipo do Curso"
+                defaultValue={''}
                 onChange={(e) => handleChange('tipo', e.target.value)}
                 {...(formErrors.tipo && { error: true, helperText: formErrors.tipo })}
               >

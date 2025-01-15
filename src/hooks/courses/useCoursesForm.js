@@ -19,7 +19,7 @@ const useCourse = (initialData, id) => {
         nome: initialData.nome || '',
         descricao: initialData.descricao || '',
         tipo: initialData.tipo || '',
-        alunos: initialData.alunos || [],
+        alunos: initialData.alunos.map((aluno) => Number(aluno.id)) || [],
       });
     }
   }, [initialData]);
@@ -37,7 +37,9 @@ const useCourse = (initialData, id) => {
     dataToSend.append('nome', formData.nome);
     dataToSend.append('descricao', formData.descricao);
     dataToSend.append('tipo', formData.tipo);
-    dataToSend.append('alunos', JSON.stringify(formData.alunos));
+    formData.alunos.forEach((id) => {
+      dataToSend.append('alunos_id', id); // Envia os IDs como números
+    });
 
     try {
       // Envia os dados para a API de criação ou atualização
