@@ -3,20 +3,25 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 /* hooks */
-import useEmblemForm from '@/hooks/emblems/useEmblemForm';
+import useCoursesForm from '@/hooks/courses/useCoursesForm';
 import PageContainer from '@/app/components/container/PageContainer';
 import Breadcrumb from '@/app/(DashboardLayout)/layout/shared/breadcrumb/Breadcrumb';
-import { Alert, Button, Grid, Stack } from '@mui/material';
+import { Alert, Box, Button, FormControl, Grid, InputLabel, MenuItem, Stack } from '@mui/material';
 import ParentCard from '@/app/components/shared/ParentCard';
 import CustomFormLabel from '@/app/components/forms/theme-elements/CustomFormLabel';
 import CustomTextField from '@/app/components/forms/theme-elements/CustomTextField';
 import AutoCompleteInstitutions from '@/app/components/awards/auto-complete/Auto-Input-Institutions';
+import ChildCard from '@/app/components/shared/ChildCard';
+import PositionCheckboxCode from '@/app/components/forms/form-elements/checkbox/code/PositionCheckboxCode';
+import PositionCheckbox from '@/app/components/forms/form-elements/checkbox/Position';
+import SelectInput from '@mui/material/Select/SelectInput';
+import { Select } from 'formik-mui';
 
-const EmblemForm = () => {
+const CoursesForm = () => {
   const router = useRouter();
 
   // Desestruturando do hook de formulário do emblema
-  const { formData, handleChange, handleSave, formErrors, success } = useEmblemForm();
+  const { formData, handleChange, handleSave, formErrors, success } = useCoursesForm();
   const [imageFile, setImageFile] = useState(null);
 
   const handleImageChange = (event) => {
@@ -27,7 +32,7 @@ const EmblemForm = () => {
 
   // Redirecionamento após sucesso
   if (success) {
-    router.push('/awards/emblema');
+    router.push('/apps/class');
   }
 
   return (
@@ -44,7 +49,7 @@ const EmblemForm = () => {
       <ParentCard title="Novo Curso">
         <Grid container spacing={3}>
           {/* Nome do Emblema */}
-          <Grid item xs={12} sm={12} lg={6}>
+          <Grid item xs={12} sm={12} lg={20}>
             <CustomFormLabel htmlFor="nome">Nome do Curso</CustomFormLabel>
             <CustomTextField
               name="nome"
@@ -52,20 +57,10 @@ const EmblemForm = () => {
               variant="outlined"
               fullWidth
               onChange={(e) => handleChange('nome', e.target.value)}
+              onBlur={() => {}}
               {...(formErrors.nome && { error: true, helperText: formErrors.nome })}
             />
           </Grid>
-
-          {/* Instituição */}
-          <Grid item xs={12} sm={12} lg={6}>
-            <CustomFormLabel htmlFor="instituicao">Instituição</CustomFormLabel>
-            <AutoCompleteInstitutions
-              fullWidth
-              onChange={(id) => handleChange('instituicao', id)}
-              {...(formErrors.instituicao && { error: true, helperText: formErrors.instituicao })}
-            />
-          </Grid>
-
           {/* Descrição do Emblema */}
           <Grid item xs={12} sm={12}>
             <CustomFormLabel htmlFor="descricao">Descrição</CustomFormLabel>
@@ -75,50 +70,29 @@ const EmblemForm = () => {
               variant="outlined"
               fullWidth
               multiline
-              rows={4}
+              rows={14}
               onChange={(e) => handleChange('descricao', e.target.value)}
               {...(formErrors.descricao && { error: true, helperText: formErrors.descricao })}
             />
           </Grid>
-
-          {/* Imagem do Emblema */}
-          <Grid item xs={12}>
-            <CustomFormLabel htmlFor="banner">Imagem</CustomFormLabel>
-            <Stack
-              direction="row"
-              spacing={2}
-              alignItems="center"
-              sx={{ border: '1px solid #ccc', borderRadius: '4px', padding: '10px' }}
-            >
-              <Button
-                variant="contained"
-                component="label"
-                color="primary"
-                sx={{ flexShrink: 0 }} // Garante que o botão não encolha
+          <Box sx={{ minWidth: 120 }}>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Age</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                label="Age"
+                value={formData.tipo || ''}
+                onChange={(e) => handleChange('tipo', e.target.value)}
+                onBlur={() => {}}
+                {...(formErrors.tipo && { error: true, helperText: formErrors.tipo })}
               >
-                {imageFile ? 'Alterar Banner' : 'Selecionar Banner'}
-                <input type="file" accept="image/*" onChange={handleImageChange} hidden />
-              </Button>
-              <div
-                style={{
-                  flexGrow: 1,
-                  overflow: 'hidden',
-                  whiteSpace: 'nowrap',
-                  textOverflow: 'ellipsis',
-                }}
-              >
-                {imageFile ? (
-                  <strong>{imageFile.name}</strong>
-                ) : formData.imagem ? (
-                  <strong>{formData.imagem.name || formData.imagem}</strong>
-                ) : (
-                  <span>Nenhum imagem selecionada</span>
-                )}
-              </div>
-            </Stack>
-            {formErrors.imagem && <Alert severity="error">{formErrors.imagem}</Alert>}
-          </Grid>
-
+                <MenuItem value={'PUBLICO'}>Publico</MenuItem>
+                <MenuItem value={'PRIVADO'}>Privado</MenuItem>
+                <MenuItem value={'IMERSAO'}>imersao</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
           {/* Botão de Salvar */}
           <Grid item xs={12} sm={12} lg={12}>
             <Stack direction="row" spacing={2} justifyContent="flex-end" mt={2}>
@@ -133,4 +107,4 @@ const EmblemForm = () => {
   );
 };
 
-export default EmblemForm;
+export default CoursesForm;
