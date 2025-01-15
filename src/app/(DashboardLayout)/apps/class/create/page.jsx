@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import useCoursesForm from '@/hooks/courses/useCoursesForm';
 import PageContainer from '@/app/components/container/PageContainer';
 import Breadcrumb from '@/app/(DashboardLayout)/layout/shared/breadcrumb/Breadcrumb';
-import { Alert, Box, Button, FormControl, Grid, InputLabel, MenuItem, Stack } from '@mui/material';
+import { Alert, Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, Stack } from '@mui/material';
 import ParentCard from '@/app/components/shared/ParentCard';
 import CustomFormLabel from '@/app/components/forms/theme-elements/CustomFormLabel';
 import CustomTextField from '@/app/components/forms/theme-elements/CustomTextField';
@@ -14,8 +14,6 @@ import AutoCompleteInstitutions from '@/app/components/awards/auto-complete/Auto
 import ChildCard from '@/app/components/shared/ChildCard';
 import PositionCheckboxCode from '@/app/components/forms/form-elements/checkbox/code/PositionCheckboxCode';
 import PositionCheckbox from '@/app/components/forms/form-elements/checkbox/Position';
-import SelectInput from '@mui/material/Select/SelectInput';
-import { Select } from 'formik-mui';
 
 const CoursesForm = () => {
   const router = useRouter();
@@ -75,24 +73,22 @@ const CoursesForm = () => {
               {...(formErrors.descricao && { error: true, helperText: formErrors.descricao })}
             />
           </Grid>
-          <Box sx={{ minWidth: 120 }}>
+          <Grid item xs={12} sm={12} lg={6}>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Age</InputLabel>
+              <CustomFormLabel htmlFor="descricao">Tipo do Curso</CustomFormLabel>
               <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                label="Age"
-                value={formData.tipo || ''}
+                labelId="tipo-curso-label"
+                id="tipo-curso-select"
+                placeholder='Tipo do Curso'
                 onChange={(e) => handleChange('tipo', e.target.value)}
-                onBlur={() => {}}
                 {...(formErrors.tipo && { error: true, helperText: formErrors.tipo })}
               >
-                <MenuItem value={'PUBLICO'}>Publico</MenuItem>
+                <MenuItem value={'PUBLICO'}>Público</MenuItem>
                 <MenuItem value={'PRIVADO'}>Privado</MenuItem>
-                <MenuItem value={'IMERSAO'}>imersao</MenuItem>
+                <MenuItem value={'IMERSAO'}>Imersão</MenuItem>
               </Select>
             </FormControl>
-          </Box>
+          </Grid>
           {/* Botão de Salvar */}
           <Grid item xs={12} sm={12} lg={12}>
             <Stack direction="row" spacing={2} justifyContent="flex-end" mt={2}>
