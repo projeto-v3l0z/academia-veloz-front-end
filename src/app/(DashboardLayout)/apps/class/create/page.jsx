@@ -6,7 +6,17 @@ import { useRouter } from 'next/navigation';
 import useCoursesForm from '@/hooks/courses/useCoursesForm';
 import PageContainer from '@/app/components/container/PageContainer';
 import Breadcrumb from '@/app/(DashboardLayout)/layout/shared/breadcrumb/Breadcrumb';
-import { Alert, Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, Stack } from '@mui/material';
+import {
+  Alert,
+  Box,
+  Button,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  Stack,
+} from '@mui/material';
 import ParentCard from '@/app/components/shared/ParentCard';
 import CustomFormLabel from '@/app/components/forms/theme-elements/CustomFormLabel';
 import CustomTextField from '@/app/components/forms/theme-elements/CustomTextField';
@@ -73,13 +83,14 @@ const CoursesForm = () => {
               {...(formErrors.descricao && { error: true, helperText: formErrors.descricao })}
             />
           </Grid>
+
           <Grid item xs={12} sm={12} lg={6}>
             <FormControl fullWidth>
               <CustomFormLabel htmlFor="descricao">Tipo do Curso</CustomFormLabel>
               <Select
                 labelId="tipo-curso-label"
                 id="tipo-curso-select"
-                placeholder='Tipo do Curso'
+                placeholder="Tipo do Curso"
                 onChange={(e) => handleChange('tipo', e.target.value)}
                 {...(formErrors.tipo && { error: true, helperText: formErrors.tipo })}
               >
@@ -89,6 +100,9 @@ const CoursesForm = () => {
               </Select>
             </FormControl>
           </Grid>
+
+        
+
           {/* Botão de Salvar */}
           <Grid item xs={12} sm={12} lg={12}>
             <Stack direction="row" spacing={2} justifyContent="flex-end" mt={2}>
