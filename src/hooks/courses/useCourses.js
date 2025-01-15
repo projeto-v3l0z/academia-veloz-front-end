@@ -12,6 +12,7 @@ const useCourse = (id) => {
     const fetchCourse = async () => {
       try {
         const response = await CourseService.getCourseById(id); // Chama o serviço para buscar o emblema
+        console.log(response);
         setCourseData(response); // Armazena os dados do emblema no estado
       } catch (error) {
         setError('Ocorreu um erro ao buscar o course'); // Se houver erro, define a mensagem de erro

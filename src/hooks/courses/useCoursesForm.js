@@ -15,6 +15,7 @@ const useCourse = (initialData, id) => {
   // Preenche os dados do formulário caso haja `initialData`
   useEffect(() => {
     if (initialData) {
+      console.log(initialData);
       setFormData({
         nome: initialData.nome || '',
         descricao: initialData.descricao || '',
