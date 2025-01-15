@@ -101,7 +101,28 @@ const CoursesForm = () => {
             </FormControl>
           </Grid>
 
-        
+          {/* Campo de Seleção de Alunos */}
+          <Grid item xs={12}>
+            <FormControl fullWidth>
+              <CustomFormLabel htmlFor="alunos">Selecionar Alunos</CustomFormLabel>
+              <Select
+                id="alunos-select"
+                multiple
+                value={selectedAlunos}
+                onChange={handleAlunosChange}
+                renderValue={(selected) =>
+                  selected.map((id) => alunos.find((aluno) => aluno.id === id)?.name).join(', ')
+                }
+              >
+                {alunos.map((aluno) => (
+                  <MenuItem key={aluno.id} value={aluno.id}>
+                    <Checkbox checked={selectedAlunos.includes(aluno.id)} />
+                    <ListItemText primary={aluno.name} />
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
 
           {/* Botão de Salvar */}
           <Grid item xs={12} sm={12} lg={12}>
