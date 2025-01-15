@@ -42,6 +42,7 @@ const useCourse = (initialData, id) => {
     try {
       // Envia os dados para a API de criação ou atualização
       if (id) {
+        await CourseService.updateCourse(id, dataToSend); // Atualiza o emblema caso
       } else {
         await CourseService.createCourse(dataToSend); // Cria novo emblema caso contrário
       }
