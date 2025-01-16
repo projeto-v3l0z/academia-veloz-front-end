@@ -105,6 +105,20 @@ const Menuitems = [
     href: '/awards/winners',
   },
 
+  {
+    id: uniqueId(),
+    title: 'Cursos',
+    icon: IconNotebook,
+    href: '/apps/class', 
+  },
+
+  {
+    id: uniqueId(),
+    title: 'Modulos',
+    icon: IconBoxMultiple,
+    href: '/apps/modules',
+  },
+  
   /* {
     navlabel: true,
     subheader: 'Home',

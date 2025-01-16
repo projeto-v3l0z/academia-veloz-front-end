@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import emblemService from '@/services/emblemService';
+import CourseService from '@/services/courseService.js';
 
 const useCourse = (initialData, id) => {
   const [formData, setFormData] = useState({
     nome: '',
     descricao: '',
     tipo: '',
+    alunos: [],
   });
 
   const [formErrors, setFormErrors] = useState({});
@@ -14,10 +15,12 @@ const useCourse = (initialData, id) => {
   // Preenche os dados do formulário caso haja `initialData`
   useEffect(() => {
     if (initialData) {
+      console.log(initialData);
       setFormData({
         nome: initialData.nome || '',
         descricao: initialData.descricao || '',
         tipo: initialData.tipo || '',
+        alunos: initialData.alunos.map((aluno) => Number(aluno.id)) || [],
       });
     }
   }, [initialData]);
@@ -35,17 +38,16 @@ const useCourse = (initialData, id) => {
     dataToSend.append('nome', formData.nome);
     dataToSend.append('descricao', formData.descricao);
     dataToSend.append('tipo', formData.tipo);
+    formData.alunos.forEach((id) => {
+      dataToSend.append('alunos_id', id); // Envia os IDs como números
+    });
 
     try {
       // Envia os dados para a API de criação ou atualização
       if (id) {
-        if (!is_file) {
-          await emblemService.patchEmblem(id, dataToSend);
-        } else {
-          await emblemService.updateEmblem(id, dataToSend); // Atualiza caso haja ID
-        }
+        await CourseService.updateCourse(id, dataToSend); // Atualiza o emblema caso
       } else {
-        await emblemService.createEmblem(dataToSend); // Cria novo emblema caso contrário
+        await CourseService.createCourse(dataToSend); // Cria novo emblema caso contrário
       }
       setFormErrors({});
       setSuccess(true);

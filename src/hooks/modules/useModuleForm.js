@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
-import emblemService from '@/services/emblemService';
 
-const useCourse = (initialData, id) => {
+import useModule from './useModule';
+import ModuleService from '@/services/moduleService';
+
+const useModule = (initialData, id) => {
   const [formData, setFormData] = useState({
-    nome: '',
+    curso: '',
+    titulo: '',
     descricao: '',
-    tipo: '',
   });
 
   const [formErrors, setFormErrors] = useState({});
@@ -14,13 +16,14 @@ const useCourse = (initialData, id) => {
   // Preenche os dados do formulário caso haja `initialData`
   useEffect(() => {
     if (initialData) {
+      console.log(initialData);
       setFormData({
-        nome: initialData.nome || '',
+        curso: initialData.curso || '',
+        titulo: initialData.titulo || '',
         descricao: initialData.descricao || '',
-        tipo: initialData.tipo || '',
       });
     }
-  }, [initialData]);
+  }, [initialData]); 
 
   // Lida com a mudança de valores nos campos do formulário
   const handleChange = (field, value) => {
@@ -28,24 +31,21 @@ const useCourse = (initialData, id) => {
   };
 
   // Função para salvar o emblema
-  const handleSave = async () => {
+  const handleSave = async () =>{
     const dataToSend = new FormData();
 
     // Adiciona os campos ao FormData
-    dataToSend.append('nome', formData.nome);
+    dataToSend.append('curso', formData.curso);
+    dataToSend.append('titulo', formData.titulo);
     dataToSend.append('descricao', formData.descricao);
-    dataToSend.append('tipo', formData.tipo);
+
 
     try {
       // Envia os dados para a API de criação ou atualização
       if (id) {
-        if (!is_file) {
-          await emblemService.patchEmblem(id, dataToSend);
-        } else {
-          await emblemService.updateEmblem(id, dataToSend); // Atualiza caso haja ID
-        }
+        await ModuleService.updateModule(id, dataToSend); // Atualiza o emblema caso
       } else {
-        await emblemService.createEmblem(dataToSend); // Cria novo emblema caso contrário
+        await ModuleService.createModule(dataToSend); // Cria novo emblema caso contrário
       }
       setFormErrors({});
       setSuccess(true);
@@ -65,4 +65,4 @@ const useCourse = (initialData, id) => {
   };
 };
 
-export default useCourse;
+export default useModule;
