@@ -2,9 +2,10 @@ import { eventData } from '@/app/api/awards/eventData';
 import apiClient from './apiClient';
 
 const ModuleService = {
-  getModule: async () => {
+  getModules: async () => {
     try {
       const response = await apiClient.get('/api/modulos/');
+      console.log('response', response);
       return response.data;
     } catch (error) {
       console.error('Erro ao buscar modulos:', error);
