@@ -34,7 +34,7 @@ const useModuleForm = (initialData, id) => {
     const dataToSend = new FormData();
 
     // Adiciona os campos ao FormData
-    dataToSend.append('curso_id', formData.curso);
+    dataToSend.append('curso_id', Number(formData.curso));
     dataToSend.append('titulo', formData.titulo);
     dataToSend.append('descricao', formData.descricao);
 

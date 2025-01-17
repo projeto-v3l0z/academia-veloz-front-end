@@ -56,7 +56,7 @@ const ModuleForm = () => {
             <CustomFormLabel htmlFor="courses">Selecionar module</CustomFormLabel>
             <AutoCompleteCourses
               fullWidth
-              onChange={(id) => handleChange('courses', id)}
+              onChange={(id) => handleChange('curso', id)}
               {...(formErrors.course && { error: true, helperText: formErrors.courses })}
             />
           </FormControl>
