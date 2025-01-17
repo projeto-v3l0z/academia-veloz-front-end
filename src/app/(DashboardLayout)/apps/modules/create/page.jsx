@@ -62,6 +62,17 @@ const ModuleForm = () => {
           </FormControl>
         </Grid>
 
+        <CustomFormLabel htmlFor="nome">Título</CustomFormLabel>
+        <CustomTextField
+          name="nome"
+          variant="outlined"
+          fullWidth
+          onChange={(e) => handleChange('nome', e.target.value)}
+          onBlur={() => {}}
+          error={formErrors.nome}
+          helperText={formErrors.nome}
+        />
+
         <Grid container spacing={3}>
           {/* Descrição do Emblema */}
           <Grid item xs={12} sm={12}>
