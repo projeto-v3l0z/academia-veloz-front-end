@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 /* hooks */
-import useCoursesForm from '@/hooks/courses/useCoursesForm';
+import useModuleForm from '@/hooks/modules/useModuleForm';
 import PageContainer from '@/app/components/container/PageContainer';
 import Breadcrumb from '@/app/(DashboardLayout)/layout/shared/breadcrumb/Breadcrumb';
 import {
@@ -26,11 +26,11 @@ import PositionCheckboxCode from '@/app/components/forms/form-elements/checkbox/
 import PositionCheckbox from '@/app/components/forms/form-elements/checkbox/Position';
 import AutoCompleteAlunos from '@/app/components/apps/courses/auto-complete/Auto-input-Alunos';
 
-const CoursesForm = () => {
+const ModuleForm = () => {
   const router = useRouter();
 
   // Desestruturando do hook de formulário do emblema
-  const { formData, handleChange, handleSave, formErrors, success } = useCoursesForm();
+  const { formData, handleChange, handleSave, formErrors, success } = useModuleForm();
   const [imageFile, setImageFile] = useState(null);
 
   const handleImageChange = (event) => {
@@ -41,7 +41,7 @@ const CoursesForm = () => {
 
   // Redirecionamento após sucesso
   if (success) {
-    router.push('/apps/class');
+    router.push('/apps/modules');
   }
 
   return (
@@ -57,21 +57,19 @@ const CoursesForm = () => {
       )}
 
       <ParentCard title="Novo Curso">
-        <Grid container spacing={3}>
-          {/* Nome do Emblema */}
-          <Grid item xs={12} sm={12} lg={20}>
-            <CustomFormLabel htmlFor="nome">Nome do Curso</CustomFormLabel>
-            <CustomTextField
-              name="nome"
-              placeholder="ex: Curso de programação em react"
-              variant="outlined"
+        {/* Campo de Seleção de Alunos */}
+        <Grid item xs={12}>
+          <FormControl fullWidth>
+            <CustomFormLabel htmlFor="alunos">Selecionar Alunos</CustomFormLabel>
+            <AutoCompleteAlunos
               fullWidth
-              onChange={(e) => handleChange('nome', e.target.value)}
-              onBlur={() => {}}
-              {...(formErrors.nome && { error: true, helperText: formErrors.nome })}
+              onChange={(id) => handleChange('courses', id)}
+              {...(formErrors.alunos && { error: true, helperText: formErrors.alunos })}
             />
-          </Grid>
+          </FormControl>
+        </Grid>
 
+        <Grid container spacing={3}>
           {/* Descrição do Emblema */}
           <Grid item xs={12} sm={12}>
             <CustomFormLabel htmlFor="descricao">Descrição</CustomFormLabel>
@@ -85,24 +83,6 @@ const CoursesForm = () => {
               onChange={(e) => handleChange('descricao', e.target.value)}
               {...(formErrors.descricao && { error: true, helperText: formErrors.descricao })}
             />
-          </Grid>
-
-          <Grid item xs={12} sm={12} lg={6}>
-            <FormControl fullWidth>
-              <CustomFormLabel htmlFor="descricao">Tipo do Curso</CustomFormLabel>
-              <Select
-                labelId="tipo-curso-label"
-                id="tipo-curso-select"
-                placeholder="Tipo do Curso"
-                defaultValue={''}
-                onChange={(e) => handleChange('tipo', e.target.value)}
-                {...(formErrors.tipo && { error: true, helperText: formErrors.tipo })}
-              >
-                <MenuItem value={'PUBLICO'}>Público</MenuItem>
-                <MenuItem value={'PRIVADO'}>Privado</MenuItem>
-                <MenuItem value={'IMERSAO'}>Imersão</MenuItem>
-              </Select>
-            </FormControl>
           </Grid>
 
           {/* Botão de Salvar */}
@@ -119,4 +99,4 @@ const CoursesForm = () => {
   );
 };
 
-export default CoursesForm;
+export default ModuleForm;
