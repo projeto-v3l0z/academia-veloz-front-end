@@ -22,7 +22,7 @@ const useModuleForm = (initialData, id) => {
         descricao: initialData.descricao || '',
       });
     }
-  }, [initialData]); 
+  }, [initialData]);
 
   // Lida com a mudança de valores nos campos do formulário
   const handleChange = (field, value) => {
@@ -30,14 +30,13 @@ const useModuleForm = (initialData, id) => {
   };
 
   // Função para salvar o emblema
-  const handleSave = async () =>{
+  const handleSave = async () => {
     const dataToSend = new FormData();
 
     // Adiciona os campos ao FormData
-    dataToSend.append('curso', formData.curso);
+    dataToSend.append('curso_id', formData.curso);
     dataToSend.append('titulo', formData.titulo);
     dataToSend.append('descricao', formData.descricao);
-
 
     try {
       // Envia os dados para a API de criação ou atualização

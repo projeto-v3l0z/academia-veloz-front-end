@@ -24,7 +24,7 @@ import AutoCompleteInstitutions from '@/app/components/awards/auto-complete/Auto
 import ChildCard from '@/app/components/shared/ChildCard';
 import PositionCheckboxCode from '@/app/components/forms/form-elements/checkbox/code/PositionCheckboxCode';
 import PositionCheckbox from '@/app/components/forms/form-elements/checkbox/Position';
-import AutoCompleteAlunos from '@/app/components/apps/courses/auto-complete/Auto-input-Alunos';
+import AutoCompleteCourses from '@/app/components/apps/modules/auto-complete/Auto-input-Courses';
 
 const ModuleForm = () => {
   const router = useRouter();
@@ -39,25 +39,25 @@ const ModuleForm = () => {
 
   return (
     <PageContainer
-      title={'Cadastro de Curso'}
+      title={'Cadastro de module'}
       description={'Formulário para cadastro de novo Curso'}
     >
-      <Breadcrumb title="Criar Curso" />
+      <Breadcrumb title="Criar Module" />
       {success && (
         <Alert severity="success" sx={{ marginBottom: 3 }}>
-          O curso foi cadastrado com sucesso!
+          O module foi cadastrado com sucesso!
         </Alert>
       )}
 
-      <ParentCard title="Novo Curso">
+      <ParentCard title="Novo module">
         {/* Campo de Seleção de Alunos */}
         <Grid item xs={12}>
           <FormControl fullWidth>
-            <CustomFormLabel htmlFor="alunos">Selecionar Alunos</CustomFormLabel>
-            <AutoCompleteAlunos
+            <CustomFormLabel htmlFor="courses">Selecionar module</CustomFormLabel>
+            <AutoCompleteCourses
               fullWidth
               onChange={(id) => handleChange('courses', id)}
-              {...(formErrors.alunos && { error: true, helperText: formErrors.alunos })}
+              {...(formErrors.course && { error: true, helperText: formErrors.courses })}
             />
           </FormControl>
         </Grid>
@@ -68,7 +68,7 @@ const ModuleForm = () => {
             <CustomFormLabel htmlFor="descricao">Descrição</CustomFormLabel>
             <CustomTextField
               name="descricao"
-              placeholder="Descrição do curso"
+              placeholder="Descrição do module"
               variant="outlined"
               fullWidth
               multiline

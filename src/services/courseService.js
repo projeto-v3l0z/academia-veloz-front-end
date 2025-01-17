@@ -22,6 +22,16 @@ const CourseService = {
     }
   },
 
+  getCourseByName: async (name) => {
+    try {
+      const response = await apiClient.get(`/api/cursos/?nome=${name}`);
+      return response.data;
+    } catch (error) {
+      console.error(`Erro ao buscar curso com name ${name}:`, error);
+      throw error;
+    }
+  },
+
   updateCourse: async (id, data) => {
     try {
       const response = await apiClient.patch(`/api/cursos/${id}/`, data);
