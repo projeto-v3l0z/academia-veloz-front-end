@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 
-import useModule from './useModule';
 import ModuleService from '@/services/moduleService';
 
-const useModule = (initialData, id) => {
+const useModuleForm = (initialData, id) => {
   const [formData, setFormData] = useState({
     curso: '',
     titulo: '',
@@ -65,4 +64,4 @@ const useModule = (initialData, id) => {
   };
 };
 
-export default useModule;
+export default useModuleForm;

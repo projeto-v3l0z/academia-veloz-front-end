@@ -31,13 +31,6 @@ const ModuleForm = () => {
 
   // Desestruturando do hook de formulário do emblema
   const { formData, handleChange, handleSave, formErrors, success } = useModuleForm();
-  const [imageFile, setImageFile] = useState(null);
-
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    setImageFile(file);
-    handleChange('imagem', file);
-  };
 
   // Redirecionamento após sucesso
   if (success) {
