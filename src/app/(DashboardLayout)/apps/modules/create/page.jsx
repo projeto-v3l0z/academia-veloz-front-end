@@ -55,6 +55,7 @@ const CoursesForm = () => {
           O curso foi cadastrado com sucesso!
         </Alert>
       )}
+
       <ParentCard title="Novo Curso">
         <Grid container spacing={3}>
           {/* Nome do Emblema */}
@@ -70,6 +71,7 @@ const CoursesForm = () => {
               {...(formErrors.nome && { error: true, helperText: formErrors.nome })}
             />
           </Grid>
+
           {/* Descrição do Emblema */}
           <Grid item xs={12} sm={12}>
             <CustomFormLabel htmlFor="descricao">Descrição</CustomFormLabel>
@@ -100,18 +102,6 @@ const CoursesForm = () => {
                 <MenuItem value={'PRIVADO'}>Privado</MenuItem>
                 <MenuItem value={'IMERSAO'}>Imersão</MenuItem>
               </Select>
-            </FormControl>
-          </Grid>
-
-          {/* Campo de Seleção de Alunos */}
-          <Grid item xs={12}>
-            <FormControl fullWidth>
-              <CustomFormLabel htmlFor="alunos">Selecionar Alunos</CustomFormLabel>
-              <AutoCompleteAlunos
-                fullWidth
-                onChange={(id) => handleChange('alunos', id)}
-                {...(formErrors.alunos && { error: true, helperText: formErrors.alunos })}
-              />
             </FormControl>
           </Grid>
 

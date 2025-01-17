@@ -214,11 +214,11 @@ const ModulesList = () => {
   });
 
   const handleCreateClick = () => {
-    router.push('/apps/class/create'); // Rota de criação de emblema
+    router.push('/apps/modules/create'); // Rota de criação de emblema
   };
 
   const handleEditClick = (id) => {
-    router.push(`/apps/class/${id}/update`); // Rota de edição de emblema
+    router.push(`/apps/modules/${id}/update`); // Rota de edição de emblema
   };
 
   const handleDeleteClick = async (id) => {
