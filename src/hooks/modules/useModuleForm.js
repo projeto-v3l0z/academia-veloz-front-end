@@ -37,7 +37,6 @@ const useModuleForm = (initialData, id) => {
     dataToSend.append('curso_id', Number(formData.curso));
     dataToSend.append('titulo', formData.titulo);
     dataToSend.append('descricao', formData.descricao);
-
     try {
       // Envia os dados para a API de criação ou atualização
       if (id) {

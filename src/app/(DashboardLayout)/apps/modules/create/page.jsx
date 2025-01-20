@@ -67,7 +67,7 @@ const ModuleForm = () => {
           name="nome"
           variant="outlined"
           fullWidth
-          onChange={(e) => handleChange('nome', e.target.value)}
+          onChange={(e) => handleChange('titulo', e.target.value)}
           onBlur={() => {}}
           error={formErrors.nome}
           helperText={formErrors.nome}

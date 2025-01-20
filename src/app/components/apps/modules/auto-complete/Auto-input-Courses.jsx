@@ -33,6 +33,7 @@ export default function AutoCompleteCourses({ onChange, value = [], error, helpe
 
   const handleChange = (event, newValue) => {
     setSelectedCourses(newValue);
+    onChange(newValue ? newValue.id : '');
   };
 
   const fetchCoursesByName = useCallback(
