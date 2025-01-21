@@ -1,4 +1,3 @@
-import { eventData } from '@/app/api/awards/eventData';
 import apiClient from './apiClient';
 
 const ModuleService = {

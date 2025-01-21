@@ -49,7 +49,7 @@ const ModulesUpdateForm = () => {
           <FormControl fullWidth>
             <CustomFormLabel htmlFor="courses">Selecionar module</CustomFormLabel>
             <AutoCompleteCourses
-              value={formData.curso.id}
+              value={formData.curso}
               fullWidth
               onChange={(id) => handleChange('curso', id)}
               {...(formErrors.course && { error: true, helperText: formErrors.courses })}

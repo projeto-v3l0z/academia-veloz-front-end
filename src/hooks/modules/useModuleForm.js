@@ -17,7 +17,7 @@ const useModuleForm = (initialData, id) => {
     if (initialData) {
       console.log(initialData);
       setFormData({
-        curso: initialData.curso || '',
+        curso: initialData.curso.id || '',
         titulo: initialData.titulo || '',
         descricao: initialData.descricao || '',
       });
@@ -32,7 +32,7 @@ const useModuleForm = (initialData, id) => {
   // Função para salvar o emblema
   const handleSave = async () => {
     const dataToSend = new FormData();
-
+    console.log(formData.curso);
     // Adiciona os campos ao FormData
     dataToSend.append('curso_id', Number(formData.curso));
     dataToSend.append('titulo', formData.titulo);

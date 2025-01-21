@@ -14,6 +14,7 @@ export default function AutoCompleteCourses({ onChange, value, error, helperText
 
   useEffect(() => {
     const fetchDefaultCourses = async () => {
+      console.log('teste', value);
       if (value) {
         try {
           const course = await courseService.getCourseById(value); // Atualizado para buscar aluno pelo id
