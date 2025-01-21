@@ -53,7 +53,7 @@ const ModuleForm = () => {
         {/* Campo de Seleção de Alunos */}
         <Grid item xs={12}>
           <FormControl fullWidth>
-            <CustomFormLabel htmlFor="courses">Selecionar module</CustomFormLabel>
+            <CustomFormLabel htmlFor="courses">Selecionar courses</CustomFormLabel>
             <AutoCompleteCourses
               fullWidth
               onChange={(id) => handleChange('curso', id)}
