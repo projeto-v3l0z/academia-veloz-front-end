@@ -56,6 +56,7 @@ import {
   IconSitemap,
   IconSchool,
   IconPhoto,
+  IconPlayerPlay,
 } from '@tabler/icons-react';
 
 const Menuitems = [
@@ -117,6 +118,13 @@ const Menuitems = [
     title: 'Modulos',
     icon: IconBoxMultiple,
     href: '/apps/modules',
+  },
+
+  {
+    id: uniqueId(),
+    title: 'Aulas',
+    icon: IconPlayerPlay,
+    href: '/apps/lessons',
   },
   
   /* {
