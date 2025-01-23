@@ -44,7 +44,7 @@ const ModuleService = {
 
   deleteModule: async (id) => {
     try {
-      const response = await apiClient.delete(`/api/modulos /${id}/`);
+      const response = await apiClient.delete(`/api/modulos/${id}/`);
       return response.data;
     } catch (error) {
       console.error(`Erro ao deletar modulo com id ${id}:`, error);

@@ -24,7 +24,7 @@ export default function AutoCompleteCourses({ onChange, value, error, helperText
           };
           setSelectedCourses(formattedCourses);
         } catch (error) {
-          console.error('Erro ao buscar Courses: ', error);
+          console.error('Erro ao buscar Curso: ', error);
         }
       }
     };
@@ -49,7 +49,7 @@ export default function AutoCompleteCourses({ onChange, value, error, helperText
         console.log(formattedCourses);
         setOptions(formattedCourses);
       } catch (error) {
-        console.error('Erro ao buscar premiados:', error);
+        console.error('Erro ao buscar Curso:', error);
       }
       setLoading(false);
     }, 300),
@@ -77,7 +77,7 @@ export default function AutoCompleteCourses({ onChange, value, error, helperText
         options={options}
         loading={loading}
         value={selectedCourses}
-        noOptionsText="Nenhum courses encontrado"
+        noOptionsText="Nenhum Curso encontrado"
         onInputChange={(event, newInputValue) => {
           fetchCoursesByName(newInputValue); // Atualizado para buscar alunos
         }}

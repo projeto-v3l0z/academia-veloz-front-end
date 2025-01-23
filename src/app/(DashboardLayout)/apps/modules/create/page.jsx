@@ -39,21 +39,21 @@ const ModuleForm = () => {
 
   return (
     <PageContainer
-      title={'Cadastro de module'}
-      description={'Formulário para cadastro de novo Curso'}
+      title={'Cadastro de modulo'}
+      description={'Formulário para cadastro de novo Modulo deCurso'}
     >
-      <Breadcrumb title="Criar Module" />
+      <Breadcrumb title="Criar modulo" />
       {success && (
         <Alert severity="success" sx={{ marginBottom: 3 }}>
-          O module foi cadastrado com sucesso!
+          O modulo foi cadastrado com sucesso!
         </Alert>
       )}
 
-      <ParentCard title="Novo module">
+      <ParentCard title="Novo modulo">
         {/* Campo de Seleção de Alunos */}
         <Grid item xs={12}>
           <FormControl fullWidth>
-            <CustomFormLabel htmlFor="courses">Selecionar courses</CustomFormLabel>
+            <CustomFormLabel htmlFor="courses">Selecionar curso</CustomFormLabel>
             <AutoCompleteCourses
               fullWidth
               onChange={(id) => handleChange('curso', id)}
@@ -79,7 +79,7 @@ const ModuleForm = () => {
             <CustomFormLabel htmlFor="descricao">Descrição</CustomFormLabel>
             <CustomTextField
               name="descricao"
-              placeholder="Descrição do module"
+              placeholder="Descrição do modulo"
               variant="outlined"
               fullWidth
               multiline

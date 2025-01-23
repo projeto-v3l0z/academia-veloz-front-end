@@ -15,7 +15,7 @@ const useCourse = (id) => {
         console.log(response);
         setCourseData(response); // Armazena os dados do emblema no estado
       } catch (error) {
-        setError('Ocorreu um erro ao buscar o course'); // Se houver erro, define a mensagem de erro
+        setError('Ocorreu um erro ao buscar o Curso'); // Se houver erro, define a mensagem de erro
       } finally {
         setLoading(false); // Define o estado de carregamento como false após a requisição
       }
