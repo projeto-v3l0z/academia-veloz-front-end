@@ -151,6 +151,24 @@ const LessonsList = () => {
         </Typography>
       ),
     }),
+    columnHelper.accessor('conteudo', {
+      header: () => 'Conteúdo', // Alterado para nome de emblema
+      cell: (info) => (
+        <Typography
+          variant="subtitle1"
+          color="textPrimary"
+          fontWeight={600}
+          sx={{
+            whiteSpace: 'nowrap',
+            maxWidth: '200px',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+          }}
+        >
+          {info.getValue()}
+        </Typography>
+      ),
+    }),
     columnHelper.accessor('id', {
       header: () => 'Ações',
       enableSorting: false,
