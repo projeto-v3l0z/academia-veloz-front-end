@@ -39,6 +39,8 @@ import {
 } from '@tabler/icons-react';
 import ParentCard from '../../shared/ParentCard';
 import LessonService from '@/services/lessonService';
+import ModuleService from '@/services/moduleService';
+
 
 function Filter({ column }) {
   const columnFilterValue = column.getFilterValue();
@@ -95,8 +97,17 @@ const LessonsList = () => {
     const fetchData = async () => {
       try {
         const data = await LessonService.getLessons();
-        if (data.results) {
-          setlessonsList(data.results);
+        const modules = await ModuleService.getModules();
+
+        if (data.results && modules.results) {
+          const lessonsWithModules = data.results.map(lesson => {
+            const relatedModule = modules.results.find(module => module.id === lesson.modulo);
+            return {
+              ...lesson,
+              moduleInfo: relatedModule
+            };
+          });
+          setlessonsList(lessonsWithModules);
         }
       } catch (err) {
         setError('Erro ao carregar aulas');
@@ -109,10 +120,51 @@ const LessonsList = () => {
   }, []);
 
   console.log(lessonsList);
+  
   // Colunas da tabela
   const columnHelper = createColumnHelper();
   const columns = [
 
+    columnHelper.accessor('moduleInfo.titulo', {
+      header: () => 'Módulo',
+      cell: (info) => {
+        return (
+          <Typography
+            variant="subtitle1"
+            color="textPrimary"
+            fontWeight={600}
+            sx={{
+              whiteSpace: 'nowrap',
+              maxWidth: '200px',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+            }}
+          >
+            {info.getValue()}
+          </Typography>
+        );
+      },
+    }),
+    columnHelper.accessor('moduleInfo.curso.nome', {
+      header: () => 'Curso',
+      cell: (info) => {
+        return (
+          <Typography
+            variant="subtitle1"
+            color="textPrimary"
+            fontWeight={600}
+            sx={{
+              whiteSpace: 'nowrap',
+              maxWidth: '200px',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+            }}
+          >
+            {info.getValue()}
+          </Typography>
+        );
+      },
+    }),
     columnHelper.accessor('titulo', {
       header: () => 'título',
       cell: (info) => {
