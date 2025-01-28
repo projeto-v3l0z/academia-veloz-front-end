@@ -38,17 +38,20 @@ const useLessonForm = (initialData, id) => {
     const dataToSend = new FormData();
     console.log(formData.modulo);
     // Adiciona os campos ao FormData
-    dataToSend.append('modulo_id', Number(formData.modulo));
+    dataToSend.append('modulo', Number(formData.modulo));
     dataToSend.append('titulo', formData.titulo);
     dataToSend.append('tipo_conteudo', formData.tipo_conteudo);
     dataToSend.append('conteudo', formData.conteudo);
     dataToSend.append('video_link', formData.video_link);
+
+    console.log(dataToSend);
+
     try {
       // Envia os dados para a API de criação ou atualização
       if (id) {
         await LessonService.updateLesson(id, dataToSend); // Atualiza o emblema caso
       } else {
-        await LessonService.createLesson(dataToSend); // Cria novo emblema caso contrário
+        await LessonService.createLesson(dataToSend);
       }
       setFormErrors({});
       setSuccess(true);

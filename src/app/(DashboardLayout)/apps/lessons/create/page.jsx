@@ -20,7 +20,7 @@ import {
 import ParentCard from '@/app/components/shared/ParentCard';
 import CustomFormLabel from '@/app/components/forms/theme-elements/CustomFormLabel';
 import CustomTextField from '@/app/components/forms/theme-elements/CustomTextField';
-
+import CustomSelect from '@/app/components/forms/theme-elements/CustomSelect';
 import ChildCard from '@/app/components/shared/ChildCard';
 import PositionCheckboxCode from '@/app/components/forms/form-elements/checkbox/code/PositionCheckboxCode';
 import PositionCheckbox from '@/app/components/forms/form-elements/checkbox/Position';
@@ -83,6 +83,21 @@ const LessonForm = () => {
           onBlur={() => {}}
           error={formErrors.video_link}
           helperText={formErrors.video_link}
+        />
+
+        <CustomFormLabel htmlFor="tipo_conteudo">Tipo de conteúdo</CustomFormLabel>
+        <CustomSelect
+          name="tipo_conteudo"
+          value={formData.tipo_conteudo || ''}
+          fullWidth
+          options={[
+            { value: 'VIDEO', label: 'Vídeo' },
+            { value: 'TEXTO', label: 'Texto' },
+            { value: 'ARQUIVO', label: 'Arquivo' }
+          ]}
+          onChange={(e) => handleChange('tipo_conteudo', e.target.value)}
+          error={formErrors.tipo_conteudo}
+          helperText={formErrors.tipo_conteudo}
         />
 
         <Grid container spacing={3}>
