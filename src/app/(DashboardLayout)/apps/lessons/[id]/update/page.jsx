@@ -6,25 +6,26 @@ import { useParams } from 'next/navigation'; // Para pegar o id da URL
 import { Alert, Button, FormControl, Grid, MenuItem, Select, Stack } from '@mui/material';
 
 /* hooks */
-import useModule from '@/hooks/modules/useModule'; // Hook para buscar os dados do emblema
-import useModuleForm from '@/hooks/modules/useModuleForm'; // Hook para lidar com a lógica do formulário de emblema
+import useLesson from '@/hooks/lessons/useLesson'; // Hook para buscar os dados do emblema
+import useLessonForm from '@/hooks/lessons/useLessonForm'; // Hook para lidar com a lógica do formulário de emblema
 import PageContainer from '@/app/components/container/PageContainer'; // Container da página
 import Breadcrumb from '@/app/(DashboardLayout)/layout/shared/breadcrumb/Breadcrumb'; // Breadcrumb para navegação
 import ParentCard from '@/app/components/shared/ParentCard'; // Card para o conteúdo
 import CustomFormLabel from '@/app/components/forms/theme-elements/CustomFormLabel'; // Label customizado para os campos do formulário
 import CustomTextField from '@/app/components/forms/theme-elements/CustomTextField'; // Campo de texto customizado
 import AutoCompleteInstitutions from '@/app/components/awards/auto-complete/Auto-Input-Institutions';
-import AutoCompleteCourses from '@/app/components/apps/modules/auto-complete/Auto-input-Courses';
+import AutoCompleteModules from '@/app/components/apps/lessons/auto-complete/Auto-input-Modules';
+import CustomSelect from '@/app/components/forms/theme-elements/CustomSelect';
 
-const ModulesUpdateForm = () => {
+const LessonUpdateForm = () => {
   const param = useParams();
   const { id } = param; // Pegando o id do emblema da URL
 
   // Buscando os dados do emblema
-  const { loading, error, moduleData } = useModule(id);
+  const { loading, error, lessonData } = useLesson(id);
 
   // Usando o hook para o formulário, passando os dados do emblema e o id
-  const { formData, handleChange, handleSave, formErrors, success } = useModuleForm(moduleData, id);
+  const { formData, handleChange, handleSave, formErrors, success } = useLessonForm(lessonData, id);
 
   // Exibe "Carregando..." enquanto os dados estão sendo carregados
   if (loading) return <div>Carregando...</div>;
@@ -33,56 +34,78 @@ const ModulesUpdateForm = () => {
 
   return (
     <PageContainer
-      title={'Cadastro de modulo'}
-      description={'Formulário para cadastro de novo modulo de curso'}
+      title={'Cadastro de aula'}
+      description={'Formulário para cadastro de nova aula de modulo'}
     >
-      <Breadcrumb title="Criar Modulo" />
+      <Breadcrumb title="Criar aula" />
       {success && (
         <Alert severity="success" sx={{ marginBottom: 3 }}>
-          O modulo foi cadastrado com sucesso!
+          A aula foi cadastrada com sucesso!
         </Alert>
       )}
 
-      <ParentCard title="Novo modulo">
-        {/* Campo de Seleção de Alunos */}
+      <ParentCard title="Nova aula">
+        {/* Campo de Seleção de Modulo */}
         <Grid item xs={12}>
           <FormControl fullWidth>
-            <CustomFormLabel htmlFor="courses">Selecionar curso</CustomFormLabel>
-            <AutoCompleteCourses
-              value={formData.curso}
+            <CustomFormLabel htmlFor="modulo">Selecionar modulo</CustomFormLabel>
+            <AutoCompleteModules
               fullWidth
-              onChange={(id) => handleChange('curso', id)}
-              {...(formErrors.course && { error: true, helperText: formErrors.courses })}
+              onChange={(id) => handleChange('modulo', id)}
+              {...(formErrors.modulo && { error: true, helperText: formErrors.modulo })}
             />
           </FormControl>
         </Grid>
 
-        <CustomFormLabel htmlFor="nome">Título</CustomFormLabel>
+        <CustomFormLabel htmlFor="titulo">Título</CustomFormLabel>
         <CustomTextField
-          name="nome"
+          name="titulo"
           variant="outlined"
           fullWidth
-          value={formData.titulo}
           onChange={(e) => handleChange('titulo', e.target.value)}
           onBlur={() => {}}
-          error={formErrors.nome}
-          helperText={formErrors.nome}
+          error={formErrors.titulo}
+          helperText={formErrors.titulo}
         />
+
+        <CustomFormLabel htmlFor="video_link">Link do video</CustomFormLabel>
+        <CustomTextField
+          name="video_link"
+          variant="outlined"
+          fullWidth
+          onChange={(e) => handleChange('video_link', e.target.value)}
+          onBlur={() => {}}
+          error={formErrors.video_link}
+          helperText={formErrors.video_link}
+        />
+
+        <CustomFormLabel htmlFor="tipo_conteudo">Tipo de conteúdo</CustomFormLabel>
+        <CustomSelect
+          name="tipo_conteudo"
+          value={formData.tipo_conteudo || ''}
+          fullWidth
+          onChange={(e) => handleChange('tipo_conteudo', e.target.value)}
+          error={formErrors.tipo_conteudo}
+          helperText={formErrors.tipo_conteudo}
+        >
+          <MenuItem value="VIDEO">VIDEO</MenuItem>
+          <MenuItem value="TEXTO">TEXTO</MenuItem>
+          <MenuItem value="ARQUIVO">ARQUIVO</MenuItem>
+        </CustomSelect>
 
         <Grid container spacing={3}>
           {/* Descrição do Emblema */}
           <Grid item xs={12} sm={12}>
-            <CustomFormLabel htmlFor="descricao">Descrição</CustomFormLabel>
+            <CustomFormLabel htmlFor="conteudo">Conteúdo</CustomFormLabel>
             <CustomTextField
-              name="descricao"
-              placeholder="Descrição do modulo"
+              name="conteudo"
+              placeholder="Conteúdo da aula"
               variant="outlined"
-              value={formData.descricao}
               fullWidth
               multiline
               rows={14}
-              onChange={(e) => handleChange('descricao', e.target.value)}
-              {...(formErrors.descricao && { error: true, helperText: formErrors.descricao })}
+              onChange={(e) => handleChange('conteudo', e.target.value)}
+              {...(formErrors.conteudo && { error: true, helperText: formErrors.conteudo })}
             />
           </Grid>
 
@@ -100,4 +123,4 @@ const ModulesUpdateForm = () => {
   );
 };
 
-export default LessonsUpdateForm;
+export default LessonUpdateForm;
