@@ -90,15 +90,14 @@ const LessonForm = () => {
           name="tipo_conteudo"
           value={formData.tipo_conteudo || ''}
           fullWidth
-          options={[
-            { value: 'VIDEO', label: 'Vídeo' },
-            { value: 'TEXTO', label: 'Texto' },
-            { value: 'ARQUIVO', label: 'Arquivo' }
-          ]}
           onChange={(e) => handleChange('tipo_conteudo', e.target.value)}
           error={formErrors.tipo_conteudo}
           helperText={formErrors.tipo_conteudo}
-        />
+        >
+          <MenuItem value="VIDEO">VIDEO</MenuItem>
+          <MenuItem value="TEXTO">TEXTO</MenuItem>
+          <MenuItem value="ARQUIVO">ARQUIVO</MenuItem>
+        </CustomSelect>
 
         <Grid container spacing={3}>
           {/* Descrição do Emblema */}
