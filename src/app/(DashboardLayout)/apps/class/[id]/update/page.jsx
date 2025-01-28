@@ -36,25 +36,25 @@ const CoursesUpdateForm = () => {
 
   return (
     <PageContainer
-      title={'Cadastro de Course'}
-      description={'Formulário para atualização de course'}
+      title={'Editar curso'}
+      description={'Formulário para atualização de curso'}
     >
-      <Breadcrumb title="Editar Course" />
+      <Breadcrumb title="Editar curso" />
 
       {success && (
         <Alert severity="success" sx={{ marginBottom: 3 }}>
-          O course foi atualizado com sucesso!
+          O curso foi atualizado com sucesso!
         </Alert>
       )}
 
-      <ParentCard title="Editar Course">
+      <ParentCard title="Editar curso">
         <Grid container spacing={3}>
           {/* Nome do Emblema */}
           <Grid item xs={12} sm={12} lg={6}>
-            <CustomFormLabel htmlFor="name">Nome do Course</CustomFormLabel>
+            <CustomFormLabel htmlFor="name">Nome do curso</CustomFormLabel>
             <CustomTextField
               name="name"
-              placeholder="ex: Course de Ouro"
+              placeholder="ex: Curso de Ouro"
               variant="outlined"
               fullWidth
               value={formData.nome}

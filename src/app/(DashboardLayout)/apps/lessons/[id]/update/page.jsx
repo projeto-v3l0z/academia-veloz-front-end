@@ -13,7 +13,7 @@ import Breadcrumb from '@/app/(DashboardLayout)/layout/shared/breadcrumb/Breadcr
 import ParentCard from '@/app/components/shared/ParentCard'; // Card para o conteúdo
 import CustomFormLabel from '@/app/components/forms/theme-elements/CustomFormLabel'; // Label customizado para os campos do formulário
 import CustomTextField from '@/app/components/forms/theme-elements/CustomTextField'; // Campo de texto customizado
-import AutoCompleteInstitutions from '@/app/components/awards/auto-complete/Auto-Input-Institutions';
+
 import AutoCompleteModules from '@/app/components/apps/lessons/auto-complete/Auto-input-Modules';
 import CustomSelect from '@/app/components/forms/theme-elements/CustomSelect';
 
@@ -34,23 +34,24 @@ const LessonUpdateForm = () => {
 
   return (
     <PageContainer
-      title={'Cadastro de aula'}
-      description={'Formulário para cadastro de nova aula de modulo'}
+      title={'Editar aula'}
+      description={'Formulário para edição de aula de modulo'}
     >
-      <Breadcrumb title="Criar aula" />
+      <Breadcrumb title="Editar aula" />
       {success && (
         <Alert severity="success" sx={{ marginBottom: 3 }}>
-          A aula foi cadastrada com sucesso!
+          A aula foi editada com sucesso!
         </Alert>
       )}
 
-      <ParentCard title="Nova aula">
+      <ParentCard title="Editar aula">
         {/* Campo de Seleção de Modulo */}
         <Grid item xs={12}>
           <FormControl fullWidth>
             <CustomFormLabel htmlFor="modulo">Selecionar modulo</CustomFormLabel>
             <AutoCompleteModules
               fullWidth
+              value={formData.modulo}
               onChange={(id) => handleChange('modulo', id)}
               {...(formErrors.modulo && { error: true, helperText: formErrors.modulo })}
             />
@@ -62,6 +63,7 @@ const LessonUpdateForm = () => {
           name="titulo"
           variant="outlined"
           fullWidth
+          value={formData.titulo}
           onChange={(e) => handleChange('titulo', e.target.value)}
           onBlur={() => {}}
           error={formErrors.titulo}
@@ -73,6 +75,7 @@ const LessonUpdateForm = () => {
           name="video_link"
           variant="outlined"
           fullWidth
+          value={formData.video_link}
           onChange={(e) => handleChange('video_link', e.target.value)}
           onBlur={() => {}}
           error={formErrors.video_link}
@@ -82,7 +85,7 @@ const LessonUpdateForm = () => {
         <CustomFormLabel htmlFor="tipo_conteudo">Tipo de conteúdo</CustomFormLabel>
         <CustomSelect
           name="tipo_conteudo"
-          value={formData.tipo_conteudo || ''}
+          value={formData.tipo_conteudo}
           fullWidth
           onChange={(e) => handleChange('tipo_conteudo', e.target.value)}
           error={formErrors.tipo_conteudo}
@@ -104,6 +107,7 @@ const LessonUpdateForm = () => {
               fullWidth
               multiline
               rows={14}
+              value={formData.conteudo}
               onChange={(e) => handleChange('conteudo', e.target.value)}
               {...(formErrors.conteudo && { error: true, helperText: formErrors.conteudo })}
             />
