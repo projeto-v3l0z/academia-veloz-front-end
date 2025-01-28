@@ -22,6 +22,16 @@ const ModuleService = {
     }
   },
 
+  getModuleByName: async (name) => {
+    try {
+      const response = await apiClient.get(`/api/modulos/?titulo=${name}`);
+      return response.data;
+    } catch (error) {
+      console.error(`Erro ao buscar modulo com name ${name}:`, error);
+      throw error;
+    }
+  },
+
   updateModule: async (id, data) => {
     try {
       const response = await apiClient.patch(`/api/modulos/${id}/`, data);

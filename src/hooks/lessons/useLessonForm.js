@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 
 import LessonService from '@/services/lessonService';
 
-const useModuleForm = (initialData, id) => {
+const useLessonForm = (initialData, id) => {
   const [formData, setFormData] = useState({
-    curso: '',
+    modulo: '',
     titulo: '',
-    descricao: '',
+    tipo_conteudo: '',
+    conteudo: '',
+    video_link: '',
   });
 
   const [formErrors, setFormErrors] = useState({});
@@ -17,9 +19,11 @@ const useModuleForm = (initialData, id) => {
     if (initialData) {
       console.log(initialData);
       setFormData({
-        curso: initialData.curso.id || '',
+        modulo: initialData.modulo.id || '',
         titulo: initialData.titulo || '',
-        descricao: initialData.descricao || '',
+        tipo_conteudo: initialData.tipo_conteudo || '',
+        conteudo: initialData.conteudo || '',
+        video_link: initialData.video_link || '',
       });
     }
   }, [initialData]);
@@ -32,17 +36,19 @@ const useModuleForm = (initialData, id) => {
   // Função para salvar o emblema
   const handleSave = async () => {
     const dataToSend = new FormData();
-    console.log(formData.curso);
+    console.log(formData.modulo);
     // Adiciona os campos ao FormData
-    dataToSend.append('curso_id', Number(formData.curso));
+    dataToSend.append('modulo_id', Number(formData.modulo));
     dataToSend.append('titulo', formData.titulo);
-    dataToSend.append('descricao', formData.descricao);
+    dataToSend.append('tipo_conteudo', formData.tipo_conteudo);
+    dataToSend.append('conteudo', formData.conteudo);
+    dataToSend.append('video_link', formData.video_link);
     try {
       // Envia os dados para a API de criação ou atualização
       if (id) {
-        await ModuleService.updateModule(id, dataToSend); // Atualiza o emblema caso
+        await LessonService.updateLesson(id, dataToSend); // Atualiza o emblema caso
       } else {
-        await ModuleService.createModule(dataToSend); // Cria novo emblema caso contrário
+        await LessonService.createLesson(dataToSend); // Cria novo emblema caso contrário
       }
       setFormErrors({});
       setSuccess(true);
@@ -62,4 +68,4 @@ const useModuleForm = (initialData, id) => {
   };
 };
 
-export default useModuleForm;
+export default useLessonForm;

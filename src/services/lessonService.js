@@ -22,6 +22,16 @@ const LessonService = {
     }
   },
 
+  getLessonByName: async (name) => {
+    try {
+      const response = await apiClient.get(`/api/aulas/?titulo=${name}`);
+      return response.data;
+    } catch (error) {
+      console.error(`Erro ao buscar aula com name ${name}:`, error);
+      throw error;
+    }
+  },
+
   updateLesson: async (id, data) => {
     try {
       const response = await apiClient.patch(`/api/aulas/${id}/`, data);

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 /* hooks */
-import useModuleForm from '@/hooks/modules/useModuleForm';
+import useLessonForm from '@/hooks/lessons/useLessonForm';
 import PageContainer from '@/app/components/container/PageContainer';
 import Breadcrumb from '@/app/(DashboardLayout)/layout/shared/breadcrumb/Breadcrumb';
 import {
@@ -20,11 +20,12 @@ import {
 import ParentCard from '@/app/components/shared/ParentCard';
 import CustomFormLabel from '@/app/components/forms/theme-elements/CustomFormLabel';
 import CustomTextField from '@/app/components/forms/theme-elements/CustomTextField';
-import AutoCompleteInstitutions from '@/app/components/awards/auto-complete/Auto-Input-Institutions';
+
 import ChildCard from '@/app/components/shared/ChildCard';
 import PositionCheckboxCode from '@/app/components/forms/form-elements/checkbox/code/PositionCheckboxCode';
 import PositionCheckbox from '@/app/components/forms/form-elements/checkbox/Position';
-import AutoCompleteCourses from '@/app/components/apps/modules/auto-complete/Auto-input-Courses';
+
+import AutoCompleteModules from '@/app/components/apps/lessons/auto-complete/Auto-input-Modules';
 
 const LessonForm = () => {
   const router = useRouter();
@@ -53,39 +54,50 @@ const LessonForm = () => {
         {/* Campo de Seleção de Modulo */}
         <Grid item xs={12}>
           <FormControl fullWidth>
-              <CustomFormLabel htmlFor="courses">Selecionar modulo</CustomFormLabel>
-            <AutoCompleteCourses
+            <CustomFormLabel htmlFor="modulo">Selecionar modulo</CustomFormLabel>
+            <AutoCompleteModules
               fullWidth
               onChange={(id) => handleChange('modulo', id)}
-              {...(formErrors.course && { error: true, helperText: formErrors.courses })}
+              {...(formErrors.modulo && { error: true, helperText: formErrors.modulo })}
             />
           </FormControl>
         </Grid>
 
-        <CustomFormLabel htmlFor="nome">Título</CustomFormLabel>
+        <CustomFormLabel htmlFor="titulo">Título</CustomFormLabel>
         <CustomTextField
-          name="nome"
+          name="titulo"
           variant="outlined"
           fullWidth
           onChange={(e) => handleChange('titulo', e.target.value)}
           onBlur={() => {}}
-          error={formErrors.nome}
-          helperText={formErrors.nome}
+          error={formErrors.titulo}
+          helperText={formErrors.titulo}
+        />
+
+        <CustomFormLabel htmlFor="video_link">Link do video</CustomFormLabel>
+        <CustomTextField
+          name="video_link"
+          variant="outlined"
+          fullWidth
+          onChange={(e) => handleChange('video_link', e.target.value)}
+          onBlur={() => {}}
+          error={formErrors.video_link}
+          helperText={formErrors.video_link}
         />
 
         <Grid container spacing={3}>
           {/* Descrição do Emblema */}
           <Grid item xs={12} sm={12}>
-            <CustomFormLabel htmlFor="descricao">Descrição</CustomFormLabel>
+            <CustomFormLabel htmlFor="conteudo">Conteúdo</CustomFormLabel>
             <CustomTextField
-              name="descricao"
-              placeholder="Descrição do modulo"
+              name="conteudo"
+              placeholder="Conteúdo da aula"
               variant="outlined"
               fullWidth
               multiline
               rows={14}
-              onChange={(e) => handleChange('descricao', e.target.value)}
-              {...(formErrors.descricao && { error: true, helperText: formErrors.descricao })}
+              onChange={(e) => handleChange('conteudo', e.target.value)}
+              {...(formErrors.conteudo && { error: true, helperText: formErrors.conteudo })}
             />
           </Grid>
 

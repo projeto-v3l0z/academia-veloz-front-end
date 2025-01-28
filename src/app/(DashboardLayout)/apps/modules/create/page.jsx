@@ -24,6 +24,7 @@ import AutoCompleteInstitutions from '@/app/components/awards/auto-complete/Auto
 import ChildCard from '@/app/components/shared/ChildCard';
 import PositionCheckboxCode from '@/app/components/forms/form-elements/checkbox/code/PositionCheckboxCode';
 import PositionCheckbox from '@/app/components/forms/form-elements/checkbox/Position';
+
 import AutoCompleteCourses from '@/app/components/apps/modules/auto-complete/Auto-input-Courses';
 
 const ModuleForm = () => {
