@@ -26,37 +26,37 @@ import PositionCheckboxCode from '@/app/components/forms/form-elements/checkbox/
 import PositionCheckbox from '@/app/components/forms/form-elements/checkbox/Position';
 import AutoCompleteCourses from '@/app/components/apps/modules/auto-complete/Auto-input-Courses';
 
-const ModuleForm = () => {
+const LessonForm = () => {
   const router = useRouter();
 
   // Desestruturando do hook de formulário do emblema
-  const { formData, handleChange, handleSave, formErrors, success } = useModuleForm();
+  const { formData, handleChange, handleSave, formErrors, success } = useLessonForm();
 
   // Redirecionamento após sucesso
   if (success) {
-    router.push('/apps/modules');
+    router.push('/apps/lessons');
   }
 
   return (
     <PageContainer
-      title={'Cadastro de modulo'}
-      description={'Formulário para cadastro de novo Modulo deCurso'}
+      title={'Cadastro de aula'}
+      description={'Formulário para cadastro de nova aula de modulo'}
     >
-      <Breadcrumb title="Criar modulo" />
+      <Breadcrumb title="Criar aula" />
       {success && (
         <Alert severity="success" sx={{ marginBottom: 3 }}>
-          O modulo foi cadastrado com sucesso!
+          A aula foi cadastrada com sucesso!
         </Alert>
       )}
 
-      <ParentCard title="Novo modulo">
-        {/* Campo de Seleção de Alunos */}
+      <ParentCard title="Nova aula">
+        {/* Campo de Seleção de Modulo */}
         <Grid item xs={12}>
           <FormControl fullWidth>
-            <CustomFormLabel htmlFor="courses">Selecionar curso</CustomFormLabel>
+              <CustomFormLabel htmlFor="courses">Selecionar modulo</CustomFormLabel>
             <AutoCompleteCourses
               fullWidth
-              onChange={(id) => handleChange('curso', id)}
+              onChange={(id) => handleChange('modulo', id)}
               {...(formErrors.course && { error: true, helperText: formErrors.courses })}
             />
           </FormControl>
